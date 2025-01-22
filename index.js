@@ -14,7 +14,11 @@ const port = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'https://welbex-front.onrender.com', // Укажите домен вашего фронтенда
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Разрешенные методы
+  allowedHeaders: ['Content-Type', 'Authorization'], // Разрешенные заголовки
+}));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Настройка Multer для сохранения файлов
