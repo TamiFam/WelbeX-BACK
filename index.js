@@ -14,11 +14,7 @@ const port = 3000;
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-  origin: 'https://welbex-front.onrender.com', // Укажите домен вашего фронтенда
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Разрешенные методы
-  allowedHeaders: ['Content-Type', 'Authorization'], // Разрешенные заголовки
-}));
+app.use(cors())
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Настройка Multer для сохранения файлов
@@ -44,10 +40,11 @@ const upload = multer({ storage }).single('file');
 //   dialect: 'postgres',
 // });
 const sequelize = new Sequelize(process.env.DB_NAME,process.env.DB_USER, process.env.DB_PASSWORD, {
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    dialect: 'postgres',
-  });
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: 'postgres',
+});
+
   // Определение модели User
 const User = sequelize.define('User', {
   id: {
